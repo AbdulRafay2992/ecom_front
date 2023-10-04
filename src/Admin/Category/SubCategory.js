@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-const SubCategory = () => {
+const SubCategory = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  let category = {
+  const [category, setCategory] = useState(props.category);
+
+  let a = {
     id: 1, name: "Electronics", subcategory: [
       {
         id: 4, name: "Mobiles", subcategory: [
@@ -13,59 +15,43 @@ const SubCategory = () => {
       { id: 3, name: "Laptops", subcategory: [] }
     ]
   }
-  function toggle_display() {
+
+  function toggle_display(event) {
+    let element=event.target.parent
     setIsExpanded(!isExpanded)
   }
+
   function add_new(parent_id) {
 
   }
-  let list = category.subcategory.map((cat) => {
-    if (cat.subcategory.length > 0) {
-      return (
-        <>
-          <div>
-            <span onClick={toggle_display}>{(isExpanded) ? "-" : "+"}</span>&nbsp;
-            {cat.name}
-          </div>
-          <li>
-            
-            <span key={cat.id}>{cat.name}</span>
-            <button onClick={() => add_new(cat.id)}><b>+</b></button>
-          </li>
-        </>
 
-      )
-    }
-    else {
-      return (
-        <li>
-          <span key={cat.id}>{cat.name}</span>
-          <button><b>+</b></button>
-        </li>
-      )
-    }
+  let children = category.subcategory.map((cat) => {
+    return (
+      <li>
+        &nbsp;&nbsp;&nbsp;&nbsp;<SubCategory category={cat} />
+      </li>
+    )
   })
-  const toggleList = () => {
-    setIsExpanded(!isExpanded);
-  };
 
+  let no_child = 
+    <li>
+      {category.name}
+      &nbsp;&nbsp;<button>add</button>
+    </li>
+  let with_children =
+    <li>
+      <span onClick={(event)=>toggle_display(event)}>
+        {isExpanded ? '-' : '+'}
+      </span>
+      &nbsp;{category.name}
+      &nbsp;&nbsp;<button>add</button>
+    </li>
 
   return (
     <ul>
-      {list}
+      {(category.subcategory.length == 0) ? no_child : with_children}
+      {children}
     </ul>
-    // <div>
-    //   <button onClick={toggleList}>
-    //     {isExpanded ? 'Collapse List' : 'Expand List'}
-    //   </button>
-    //   {isExpanded && (
-    //     <ul>
-    //       <li>Item 1</li>
-    //       <li>Item 2</li>
-    //       <li>Item 3</li>
-    //     </ul>
-    //   )}
-    // </div>
   );
 }
 
