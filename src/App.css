@@ -1,0 +1,307 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #bebebe;
+}
+
+.header-logo svg {
+  max-height: 50px;
+}
+
+.header-search {
+  margin: 0px 20px;
+}
+
+.header-search input {
+  padding: 5px;
+}
+
+.header-search button {
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+}
+
+.header-icons {
+  margin-left: auto;
+  display: flex;
+}
+
+.cart-icon>i,
+.login-icon>i {
+  width: 0px;
+  margin: 0px 20px;
+}
+
+.product-categories ul {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.product-categories li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.filter_categories {
+  margin: 10px;
+  width: 10%;
+
+}
+
+/* Footer.css */
+.footer {
+  position: relative;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.contact-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-input {
+  margin: 5px;
+  padding: 5px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category {
+  margin: 0 10px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.company-statement {
+  margin-bottom: 20px;
+}
+
+.main-body {
+  display: flex;
+}
+
+.products {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 50px;
+  width: 90%;
+}
+
+.product {
+  margin: 5px;
+  width: 160px;
+}
+
+.img-cont {
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+}
+
+.prod-img {
+  width: 160px;
+  height: 160px;
+}
+
+.prod-title {
+  color: teal;
+}
+
+.prod-desc {
+  font-size: 12px;
+  height: 36px;
+  overflow: hidden;
+}
+
+.prod-price {
+  background-color: chartreuse;
+  padding: 5px;
+}
+
+/* YourComponent.scss */
+
+.your-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  border: 1px orangered solid;
+}
+
+th {
+  background-color: #0a7a61;
+  color: #ffffff;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin-right: 5px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.add-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.add-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.edit-icon::before {
+  content: "\270E";
+  /* Unicode character for edit (✎) */
+  font-size: 20px;
+  color: #007bff;
+  /* Blue color, change as needed */
+  cursor: pointer;
+}
+
+/* Delete icon */
+.delete-icon::before {
+  content: "\2716";
+  /* Unicode character for delete (✖) */
+  font-size: 20px;
+  color: #ff0000;
+  /* Red color, change as needed */
+  cursor: pointer;
+}
+
+/* Add hover effect */
+.edit-icon::before:hover,
+.delete-icon::before:hover {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex>a {
+  margin: 5px;
+  background: #61dafb;
+  transition: backgroung 1s;
+}
+
+.flex>a:hover {
+  background: white;
+}
+
+.admin-menu {
+  margin: 15px;
+  cursor: pointer;
+  padding: 5px;
+  border-bottom: turquoise 3px solid;
+}
+
+.h-item {
+  margin: 1px;
+  padding: 5px;
+  background: #61dafb;
+  transition: background 0.5s;
+}
+
+.h-item>a {
+  text-decoration: none;
+}
+
+.h-item:hover {
+  background: #bebebe;
+}
+
+li {
+  list-style-type: none;
+}
