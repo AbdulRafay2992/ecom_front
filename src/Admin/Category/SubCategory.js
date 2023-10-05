@@ -17,30 +17,32 @@ const SubCategory = (props) => {
   }
 
   function toggle_display(event) {
-    let element=event.target.parent
+    let element = event.target.parent
     setIsExpanded(!isExpanded)
   }
 
   function add_new(parent_id) {
 
   }
-
+  const expand_reduce = {
+    display: isExpanded ? 'block' : 'none'
+  };
   let children = category.subcategory.map((cat) => {
     return (
       <li>
-        &nbsp;&nbsp;&nbsp;&nbsp;<SubCategory category={cat} />
+        &nbsp;&nbsp;&nbsp;&nbsp;<SubCategory category={cat} style={expand_reduce} />
       </li>
     )
   })
 
-  let no_child = 
+  let no_child =
     <li>
       {category.name}
       &nbsp;&nbsp;<button>add</button>
     </li>
   let with_children =
     <li>
-      <span onClick={(event)=>toggle_display(event)}>
+      <span onClick={(event) => toggle_display(event)}>
         {isExpanded ? '-' : '+'}
       </span>
       &nbsp;{category.name}
@@ -48,9 +50,13 @@ const SubCategory = (props) => {
     </li>
 
   return (
-    <ul>
-      {(category.subcategory.length == 0) ? no_child : with_children}
-      {children}
+    <ul style={props.style}>
+      {category.subcategory.length === 0 ? no_child : (
+        <>
+          {with_children}
+          {children}
+        </>
+      )}
     </ul>
   );
 }

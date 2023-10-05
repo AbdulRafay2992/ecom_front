@@ -19,7 +19,8 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    {% csrf_token %}<div id="root"></div>
+    <!-- {% csrf_token %} -->
+    <div id="root"></div>
     <script>window.csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value</script>
     <!--
       This HTML file is a template.
