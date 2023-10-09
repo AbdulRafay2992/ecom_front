@@ -1,23 +1,32 @@
 import SubCategory from "./SubCategory";
+import { categories_tree, fetchData } from "../Methods";
+import { useState, useEffect } from "react";
+import ContextProvider from "./ContextProvider";
 
 function Category() {
-    let category = {
-        id: 1, name: "Electronics", subcategory: [
-            {
-                id: 6, name: "Mobiles", subcategory: [
-                    { id: 7, name: "VivoY90", subcategory: [
-                        { id: 9, name: "V1", subcategory: [
-                            { id: 10, name: "V1_1", subcategory: [] }
-                        ] }
-                    ] },
-                    { id: 8, name: "Samsung Galaxy", subcategory: [] }
-                ]
-            },
-            { id: 3, name: "Laptops", subcategory: [] },
-            { id: 4, name: "Cameras", subcategory: [] },
-            { id: 5, name: "LEDs", subcategory: [] },
-        ]
-    }
-    return (<SubCategory category={category} />)
+
+  const [categories, setCategory] = useState([])
+  useEffect(() => {
+    fetchData('/getcategories',setCategories)
+  }, [])
+
+  function setCategories(data) {
+    setCategory(categories_tree(data));
+    setCategory((prevNewCategory) => {
+      return prevNewCategory;
+    });
+  }
+
+  return (
+    <ContextProvider>
+      {
+        categories.map((categorie, index) => {
+          return (
+            <SubCategory key={index} id={categorie.id} category={categorie} setcategories={setCategories} />
+          )
+        })
+      }
+    </ContextProvider>
+  )
 }
 export default Category;

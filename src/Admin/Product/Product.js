@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {postData,getData} from './Methods';
+import {postData,getData} from '../Methods';
 const Product = () => {
     //DATA
     const attributes = ['size', 'design', 'pack'];

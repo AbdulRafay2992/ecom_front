@@ -1,7 +1,7 @@
 import Category from './Category/Category';
-import Products from './Products';
+import Products from './Products/Products';
 import Attributes from './Attributes/Attributes';
-import Product from './Product';
+import Product from './Product/Product';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 const Admin = () => {
@@ -25,7 +25,7 @@ const Admin = () => {
         <Routes>
           <Route path="" element={<h1>HELLO Main Page</h1>} />
           <Route path="categories" element={<Category />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products/" element={<Products />} />
           <Route path="attributes" element={<Attributes />} />
           <Route path="product/:id" element={<Product />} />
         </Routes>

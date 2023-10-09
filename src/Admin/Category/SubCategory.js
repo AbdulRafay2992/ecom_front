@@ -1,52 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { postData } from '../Methods';
+import Context from './Context';
 
 const SubCategory = (props) => {
+  const [newCategory, setnewCategory] = useState()
   const [isExpanded, setIsExpanded] = useState(false);
-  const [category, setCategory] = useState(props.category);
+  const [UI, setUI] = useState(<button onClick={saveCancel_UI}>Add</button>)
 
-  let a = {
-    id: 1, name: "Electronics", subcategory: [
-      {
-        id: 4, name: "Mobiles", subcategory: [
-          { id: 5, name: "VivoY90", subcategory: [] },
-          { id: 6, name: "Samsung Galaxy", subcategory: [] }
-        ]
-      },
-      { id: 3, name: "Laptops", subcategory: [] }
-    ]
+  const { isEditing, setisEditing } = useContext(Context);
+
+  const category = props.category;
+  const ID = props.id
+  const setcategories = props.setcategories;
+
+  const AddUI = <button onClick={saveCancel_UI}>Add</button>
+
+  function saveCancel_UI() {
+    setisEditing((isEditing) => {
+      if (!isEditing) {
+        setUI(
+          <>
+            <input type="text" onChange={(event) => setnewCategory(event.target.value)} />
+            <button onClick={save}>Save</button>
+            <button onClick={cancel}>Cancel</button>
+          </>);
+      }
+      return true;
+    })
   }
 
-  function toggle_display(event) {
-    let element = event.target.parent
+
+  function save() {
+    if (!isEditing) {
+      setnewCategory((newCategory) => {
+        postData('addcategory/', { 'name': newCategory, 'parent_category': ID }, setcategories);
+        return;
+      });
+      setUI(AddUI)
+      setisEditing(false)
+    }
+  }
+  function cancel() {
+    if (!isEditing) {
+      setUI(AddUI)
+      setisEditing(false)
+    }
+  }
+
+  function toggle_display() {
     setIsExpanded(!isExpanded)
   }
 
-  function add_new(parent_id) {
-
-  }
   const expand_reduce = {
     display: isExpanded ? 'block' : 'none'
   };
-  let children = category.subcategory.map((cat) => {
-    return (
-      <li>
-        &nbsp;&nbsp;&nbsp;&nbsp;<SubCategory category={cat} style={expand_reduce} />
-      </li>
-    )
-  })
 
   let no_child =
-    <li>
+    <li key={0}>
       {category.name}
-      &nbsp;&nbsp;<button>add</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      {UI}
     </li>
   let with_children =
-    <li>
+    <li key={0}>
       <span onClick={(event) => toggle_display(event)}>
-        {isExpanded ? '-' : '+'}
+        {isExpanded ? <span>&#8595;</span> : <span>&#8594;</span>}
       </span>
-      &nbsp;{category.name}
-      &nbsp;&nbsp;<button>add</button>
+      {category.name}
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      {UI}
     </li>
 
   return (
@@ -54,7 +76,13 @@ const SubCategory = (props) => {
       {category.subcategory.length === 0 ? no_child : (
         <>
           {with_children}
-          {children}
+          {category.subcategory.map((cat, index) => {
+            return (
+              <li key={index}>
+                <SubCategory id={cat.id} category={cat} style={expand_reduce} setcategories={setcategories} />
+              </li>
+            )
+          })}
         </>
       )}
     </ul>
